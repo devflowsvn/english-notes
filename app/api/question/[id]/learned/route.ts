@@ -4,15 +4,17 @@ import { NextResponse } from "next/server";
 // PATCH /api/question/[id]/learned
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  props: { params: Promise<{ id: string }> }
 ) {
+  // Await params trước khi sử dụng
+  const params = await props.params;
   const { id } = params;
 
   try {
     const updated = await prisma.question.update({
       where: { id },
       data: {
-        isReviewed: true, // cập nhật thời gian hiện tại
+        isReviewed: true,
       },
     });
 
