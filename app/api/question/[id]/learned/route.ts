@@ -2,12 +2,10 @@ import { prisma } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 // PATCH /api/question/[id]/learned
-export async function PATCH(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(req: Request) {
   // Await params trước khi sử dụng
-  const { id } = await params;
+  const body = await req.json();
+  const { id } = body;
 
   try {
     const updated = await prisma.question.update({

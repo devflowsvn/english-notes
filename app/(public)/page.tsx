@@ -67,7 +67,10 @@ const HomePage = () => {
       try {
         // Update DB
         await fetch(`/api/question/${currentQuestion.id}/learned`, {
-          method: "PATCH",
+          method: "POST",
+          body: JSON.stringify({
+            id: currentQuestion.id,
+          }),
         });
 
         setQuestions((prev) =>
